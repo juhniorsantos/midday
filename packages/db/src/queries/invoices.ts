@@ -1111,7 +1111,7 @@ export type UpdateInvoiceParams = {
   eInvoiceStatus?: string | null;
   eInvoiceSiloEntryId?: string | null;
   eInvoiceJobId?: string | null;
-  eInvoiceFaults?: { message: string }[] | null;
+  eInvoiceFaults?: unknown | null;
   teamId: string;
   userId?: string;
 };
