@@ -425,6 +425,9 @@
     "packages/e-invoice": {
       "name": "@midday/e-invoice",
       "version": "0.0.1",
+      "dependencies": {
+        "zod": "catalog:",
+      },
     },
     "packages/email": {
       "name": "@midday/email",
