@@ -379,7 +379,10 @@ export const teamRouter = createTRPCRouter({
     async ({ ctx: { db, teamId } }) => {
       if (!teamId) return null;
 
-      return getEInvoiceRegistration(db, { teamId, provider: "peppol" });
+      return getEInvoiceRegistration(db, {
+        teamId,
+        provider: E_INVOICE_PROVIDER_PEPPOL,
+      });
     },
   ),
 
@@ -433,7 +436,7 @@ export const teamRouter = createTRPCRouter({
       // Check if already registered or processing (guard before upsert)
       const existing = await getEInvoiceRegistration(db, {
         teamId,
-        provider: "peppol",
+        provider: E_INVOICE_PROVIDER_PEPPOL,
       });
 
       if (existing?.status === "registered") {
@@ -454,7 +457,7 @@ export const teamRouter = createTRPCRouter({
       // duplicate rows even if concurrent requests pass the guard above.
       const registration = await upsertEInvoiceRegistration(db, {
         teamId,
-        provider: "peppol",
+        provider: E_INVOICE_PROVIDER_PEPPOL,
         status: "pending",
         faults: null,
       });
