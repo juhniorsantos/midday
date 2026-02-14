@@ -273,6 +273,9 @@ export const activityTypeEnum = pgEnum("activity_type", [
   // E-invoice delivery activities
   "e_invoice_sent",
   "e_invoice_error",
+
+  // E-invoice incoming activities
+  "e_invoice_received",
 ]);
 
 export const activitySourceEnum = pgEnum("activity_source", [
@@ -4060,6 +4063,9 @@ export const eInvoiceRegistrations = pgTable(
   },
   (table) => [
     index("e_invoice_registrations_team_id_idx").on(table.teamId),
+    index("e_invoice_registrations_peppol_id_idx")
+      .on(table.peppolId)
+      .where(sql`peppol_id IS NOT NULL`),
     unique("e_invoice_registrations_team_provider_unique").on(
       table.teamId,
       table.provider,
